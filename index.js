@@ -4,8 +4,10 @@ import { AppRegistry } from 'react-native';
 import App from './App';
 import { name as appName } from './app.json';
 
+
+// For development purpose only
 if (__DEV__) {
-  import * from 'react-devtools';
+  require('react-devtools-core');
 }
 
 AppRegistry.registerComponent(appName, () => App);

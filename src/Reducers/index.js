@@ -1,7 +1,8 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import { ApolloClient } from 'react-apollo';
+import { ApolloClient } from 'apollo-client';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
-import { GitHubReducer } from './github';
+import GitHubReducer from './github';
 import { GITHUB_GRAPHQL } from '../../app.json';
 
 
@@ -10,13 +11,13 @@ import { GITHUB_GRAPHQL } from '../../app.json';
 /* Create HTTPLINK  */
 const httpLink = new HttpLink({ uri: GITHUB_GRAPHQL });
 const client = new ApolloClient({
-  link: httpLink
+  link: httpLink,
+  cache: new InMemoryCache()
 });
 
 /* Combine all the reducers to App reducer */
 const AppReducer =  combineReducers({
-  gitHub: GitHubReducer,
-  apollo: client.reducer
+  gitHub: GitHubReducer
 });
 
 const rootReducer = function(store, action) {
@@ -25,8 +26,6 @@ const rootReducer = function(store, action) {
 
 /* Create Dummy inital store  */
 let initialStore = {};
-let store = createStore(rootReducer, initialStore, compose(
-  applyMiddleware(client.middleware())
-));
+let store = createStore(rootReducer, initialStore);
 
-export { AppReducer, store };
+export { AppReducer, store, client };

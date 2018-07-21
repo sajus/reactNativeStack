@@ -8,8 +8,7 @@
 
 import React, { Component } from 'react';
 import { ApolloProvider } from 'react-apollo';
-import { Platform, StyleSheet, Text, View } from 'react-native';
-import { store } from './src/Reducers';
+import { store, client } from './src/Reducers';
 import { RootComponent } from './src/Components'
 
 type Props = {};
