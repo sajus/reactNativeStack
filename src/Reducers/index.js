@@ -1,9 +1,9 @@
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import GitHubReducer from './github';
-import { GITHUB_GRAPHQL } from '../../app.json';
+import { GITHUB_GRAPHQL } from '../config.json';
 
 
 /* Apollo Redux */

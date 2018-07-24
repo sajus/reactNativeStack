@@ -1,5 +1,4 @@
 {
   "name": "myfirstapp",
-  "displayName": "My First App",
-  "GITHUB_GRAPHQL": "https://api.github.com/graphql"
+  "displayName": "My First App"
 }
