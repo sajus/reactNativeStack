@@ -1,10 +1,12 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
+import ReduxPromise from 'redux-promise';
 import GitHubReducer from './github';
+import gitLogin from '../Graphql/githubLogin'
 import { GITHUB_GRAPHQL } from '../config.json';
-
+import { loginActionSuccessCreator } from '../Actions/GitActions';
 
 /* Apollo Redux */
 
@@ -26,6 +28,12 @@ const rootReducer = function(store, action) {
 
 /* Create Dummy inital store  */
 let initialStore = {};
-let store = createStore(rootReducer, initialStore);
+
+let store = createStore(rootReducer, compose(applyMiddleware(ReduxPromise)));
+
+gitLogin().then(function(token) {
+  store.dispatch(loginActionSuccessCreator(token));
+});
+
 
 export { AppReducer, store, client };
