@@ -7,7 +7,6 @@ function GitHubReducer(state = {}, action) {
         TOKEN: action.login
       }
       return state
-    break
     default:
       return state
   }

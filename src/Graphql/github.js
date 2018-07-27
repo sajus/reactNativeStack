@@ -1,26 +1,42 @@
 import gql from "graphql-tag";
-import { Query } from "react-apollo";
-import React from 'react';
-
-const GET_GIT_FOLLOERS = gql`
-  query followers($user: String!) {
-    nodes
-    totalCount
+import { client , store } from '../Reducers'
+import {
+  gitFollowersSuccessCreator
+} from '../Actions/GitActions'
+const GET_GIT_FOLLOERS = gql `
+  query getFollers($login: String!) {
+    user(login: $login) {
+      followers(first: 20) {
+        edges {
+          node {
+            id
+            name
+          }
+        }
+      }
+      following(first: 20) {
+        edges {
+          node {
+            id
+            name
+          }
+        }
+      }
+    }
   }
 `;
 
-const GitHubFollers = function(gitUserName) {
-  return( <Query query={GET_GIT_FOLLOERS} variables={{ gitUserName }}>
-    console.log(this)
-    {function(loading, error, data) {
-        if (loading) console.log('loading');
-        if (error) console.log('error');
-        if (data) console.log(data)
-        return (
-          <span>Test</span>
-        )
-    }}
-  </Query>)
+const gitHubFollers = function(user) {
+  return client.query({
+    query: GET_GIT_FOLLOERS,
+    variables: {
+      'login': user
+    }
+  })
+  .then(function(data){
+    //return data;
+    store.dispatch(gitFollowersSuccessCreator(data))
+  })
 }
 
-export { GitHubFollers }
+export { gitHubFollers }
