@@ -63,15 +63,24 @@ const rootReducer = function(store, action) {
 }
 
 /* Create Dummy inital store  */
-let initialStore = {};
+let initialStore = {
+  gitHub: {
+    followers: [],
+    following: [],
+    login: {
 
-let store = createStore(rootReducer, compose(applyMiddleware(ReduxPromise)));
+    }
+  }
+};
+
+let store = createStore(rootReducer, initialStore, compose(applyMiddleware(ReduxPromise)));
 
 gitLogin().then(function(token) {
   TOKEN = token;
   store.dispatch(loginActionSuccessCreator(token));
-  gitHubFollers('sajus');
 });
+
+store.subscribe(() => console.log(store.getState()));
 
 
 export {

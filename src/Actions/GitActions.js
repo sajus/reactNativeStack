@@ -22,10 +22,10 @@ function loginActionFaildCreator(error) {
   return action
 }
 
-function gitFollowersSuccessCreator(data) {
+function gitFollowersSuccessCreator(follower) {
   const action = {
     type: GIT_FOLLOWER_SUCCESS,
-    data
+    follower
   }
   return action
 }
