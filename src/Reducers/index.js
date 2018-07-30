@@ -73,6 +73,10 @@ gitLogin().then(function(token) {
   gitHubFollers('sajus');
 });
 
+store.subscribe(() => {
+  console.log(store.getState())
+})
+
 
 export {
   AppReducer,
