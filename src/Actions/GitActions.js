@@ -4,6 +4,7 @@ const GIT_LOGIN_FAILD = "git_login_faild"
 const GIT_LOGIN_EVENT = "git_login_event"
 const GIT_FOLLOWER_SUCCESS = "git_folloers_sucess"
 const GIT_FOLLOWER_QUERY = "git_folloers_query"
+const GIT_USER_REPO_LIST = "git_user_repo_list"
 
 /* Action Creators */
 function loginActionSuccessCreator(login) {
@@ -38,6 +39,15 @@ function gitFollowersQueryCreator(userQuery) {
   return action
 }
 
+function gitRepoListSuccessCreator(repolist) {
+  //console.log("gitUserRepoList@@@@@@@@@");
+  const action = {
+    type: GIT_USER_REPO_LIST,
+    repolist
+  }
+  return action
+}
+
 
 export {
   GIT_LOGIN_SUCCESS,
@@ -45,8 +55,10 @@ export {
   GIT_LOGIN_EVENT,
   GIT_FOLLOWER_SUCCESS,
   GIT_FOLLOWER_QUERY,
+  GIT_USER_REPO_LIST,
   loginActionSuccessCreator,
   loginActionFaildCreator,
   gitFollowersSuccessCreator,
-  gitFollowersQueryCreator
+  gitFollowersQueryCreator,
+  gitRepoListSuccessCreator
 }

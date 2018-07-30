@@ -7,6 +7,10 @@ function GitHubReducer(state = {}, action) {
         TOKEN: action.login
       }
       return state
+      GIT_USER_REPO_LIST:
+      state.repoList = action.repolist
+      return state
+      break
     default:
       return state
   }
